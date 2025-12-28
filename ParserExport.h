@@ -31,11 +31,21 @@ extern char lex_buffer[MAX_MEXPR_LEN];
 extern stack_t undo_stack;
 extern char *curr_ptr;
 extern int cyylex();
-extern void yyrewind();
+extern void yyrewind(int n);
 extern void parser_stack_reset();
-extern void lex_set_scan_buffer();
+extern void lex_set_scan_buffer(const char *buffer);
+extern void RESTORE_CHKP(int a);
 
 #define CHECKPOINT(a) a = undo_stack.top
-#define RESTORE_CHKP(a) = yyrewind(undo_stack.top - a)
+
+#define PARSER_LOG_ERR(token_obtained, expected_token)                      \
+    printf("%s(%d): Token Obtained = %d (%s), expected token = %d\n",      \
+           __FUNCTION__, __LINE__, token_obtained,                          \
+           lex_curr_token, expected_token)
+
+
+#define RETURN_PARSE_ERROR  \
+    {RESTORE_CHKP(_lchkp);     \
+    return PARSE_ERR;}
 
 #endif

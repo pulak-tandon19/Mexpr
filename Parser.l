@@ -109,6 +109,26 @@ void yyrewind(int n) {
     yy_scan_string(curr_ptr);
 }
 
+void
+RESTORE_CHKP(int a) {
+
+    lex_data_t lex_data;
+    int data_len = 0;
+
+    while (undo_stack.top > a) {
+        
+        lex_data =  lex_pop();
+        data_len += lex_data.token_len;
+
+        if (lex_data.token_val) { 
+            free (lex_data.token_val);
+            lex_data.token_val = NULL;
+        }
+    }
+    curr_ptr -= data_len;
+    yy_scan_string(curr_ptr);
+}
+
 #include "MexprcppEnums.h"
 
 %}
