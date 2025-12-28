@@ -30,6 +30,7 @@ extern "C" int yylex();
 extern char lex_buffer[MAX_MEXPR_LEN];
 extern stack_t undo_stack;
 extern char *curr_ptr;
+extern int cyylex();
 
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
@@ -49,6 +50,27 @@ lex_pop () {
     undo_stack.top--;
     return res;
 }
+
+static void process_white_space(int n) {
+    lex_data_t lex_data;
+    lex_data.token_len = n;
+    curr_ptr += n;
+    lex_data.token_code = PARSER_WHITE_SPACE;
+    lex_data.token_val = NULL;
+    lex_push(lex_data);
+}
+
+int cyylex() {
+    int token_code = yylex();
+    lex_data_t lex_data;
+    lex_data.token_code = token_code;
+    lex_data.token_len = yyleng;
+    curr_ptr += yyleng;
+    lex_data.token_val = (char *)calloc(1, yyleng + 1);
+    strncpy(lex_data.token_val, yytext, yyleng + 1);
+    lex_push(lex_data); 
+    return token_code;
+} 
 
 #include "MexprcppEnums.h"
 
@@ -150,12 +172,12 @@ lex_pop () {
 
 [ ] {
     /* Ignore */
-    
+    process_white_space(1);
 }
 
 [\t] {
     /*ignore tabs*/
-   
+    process_white_space(4);
 }
 
 0|-?[1-9][0-9]* {
