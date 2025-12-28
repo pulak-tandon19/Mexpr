@@ -31,6 +31,9 @@ extern char lex_buffer[MAX_MEXPR_LEN];
 extern stack_t undo_stack;
 extern char *curr_ptr;
 extern int cyylex();
+extern void yyrewind();
+extern void parser_stack_reset();
+extern void lex_set_scan_buffer();
 
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
@@ -63,6 +66,33 @@ lex_pop () {
     }
 
     return res;
+}
+
+void 
+parser_stack_reset () {
+
+    int i;
+    lex_data_t *lex_data;
+
+    for (i = 0; i < undo_stack.top; i++) {
+        lex_data = &undo_stack.data[i];
+        lex_data->token_code = 0;
+        lex_data->token_len = 0;
+        if (lex_data->token_val) {
+            free (lex_data->token_val);
+            lex_data->token_val = NULL;
+        }
+    }
+    undo_stack.top = -1;
+    curr_ptr = lex_buffer;
+    lex_curr_token = NULL;
+    lex_curr_token_len = 0;
+}
+
+void 
+lex_set_scan_buffer (const char *buffer) {
+
+    yy_scan_string (buffer);
 }
 
 static void process_white_space(int n) {
