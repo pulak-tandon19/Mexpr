@@ -38,6 +38,18 @@ extern void RESTORE_CHKP(int a);
 
 #define CHECKPOINT(a) a = undo_stack.top
 
+#define RETURN_PARSE_SUCCESS    \
+    return PARSE_SUCCESS
+
+#define RETURN_PARSE_ERROR  \
+    {RESTORE_CHKP(_lchkp);     \
+    return PARSE_ERR;}
+
+#define parse_init()             \
+    int token_code = 0;          \
+    int _lchkp = undo_stack.top;    \
+    parse_rc_t err = PARSE_SUCCESS
+
 #define PARSER_LOG_ERR(token_obtained, expected_token)                      \
     printf("%s(%d): Token Obtained = %d (%s), expected token = %d\n",      \
            __FUNCTION__, __LINE__, token_obtained,                          \
