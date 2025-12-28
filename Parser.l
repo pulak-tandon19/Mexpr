@@ -34,12 +34,15 @@ extern int cyylex();
 
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
+char *lex_curr_token;
+int lex_curr_token_len; 
 
 static void 
 lex_push (lex_data_t lex_data) {
-
     assert (undo_stack.top < MAX_MEXPR_LEN - 1);
     undo_stack.data[++undo_stack.top] = lex_data;
+    lex_curr_token = (char *)lex_data.token_val;
+    lex_curr_token_len = lex_data.token_len;
 }
 
 static lex_data_t
@@ -48,6 +51,17 @@ lex_pop () {
     assert (undo_stack.top > -1);
     lex_data_t res = undo_stack.data[undo_stack.top];
     undo_stack.top--;
+
+    if (undo_stack.top > -1) {
+        lex_data_t top = undo_stack.data[undo_stack.top];
+        lex_curr_token = (char*)top.token_val;
+        lex_curr_token_len = top.token_len;
+    }
+    else {
+        lex_curr_token = NULL;
+        lex_curr_token_len = 0;
+    }
+
     return res;
 }
 
@@ -71,6 +85,31 @@ int cyylex() {
     lex_push(lex_data); 
     return token_code;
 } 
+
+void yyrewind(int n) {
+    if (n <= 0)
+        return;
+
+    // if ptr is lreaady at start of the buffer, you can't go back
+    if (curr_ptr == lex_buffer)
+        return;
+
+    int data_len = 0;
+    lex_data_t lex_data;
+    while (n) {
+        lex_data = lex_pop();
+        data_len = lex_data.token_len;
+        if (lex_data.token_code == PARSER_WHITE_SPACE) {
+            continue;
+        }
+        n--;
+        lex_data.token_code = 0;
+        lex_data.token_len = 0;
+    }
+
+    curr_ptr -= data_len;
+    yy_scan_string(curr_ptr);
+}
 
 #include "MexprcppEnums.h"
 
