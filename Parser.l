@@ -35,6 +35,9 @@ extern void yyrewind();
 extern void parser_stack_reset();
 extern void lex_set_scan_buffer();
 
+#define CHECKPOINT(a) a = undo_stack.top
+#define RESTORE_CHKP(a) = yyrewind(undo_stack.top - a)
+
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
 char *lex_curr_token;
