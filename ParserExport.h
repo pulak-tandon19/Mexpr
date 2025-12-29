@@ -3,6 +3,13 @@
 
 #include <assert.h>
 
+typedef enum parse_rc_ {
+
+    PARSE_ERR,
+    PARSE_SUCCESS
+
+} parse_rc_t;
+
 typedef struct lex_data_ {
 
     int token_code;
