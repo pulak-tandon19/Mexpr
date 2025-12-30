@@ -157,6 +157,10 @@ RESTORE_CHKP(int a) {
     return MATH_CPP_GREATER_THAN;
 }
 
+">=" {
+    return MATH_CPP_GREATER_THAN_EQ;
+}
+
 "=" {
     return MATH_CPP_EQ;
 }
@@ -274,6 +278,7 @@ RESTORE_CHKP(int a) {
 %%
 
 extern parse_rc_t E();
+extern parse_rc_t Q();
 
 int main(int argc, char **argv) {
 
@@ -298,13 +303,13 @@ int main(int argc, char **argv) {
         //     token_code = yylex();
         // }
 
-        parse_rc_t err = E();
+        parse_rc_t err = Q();
 
         int token_code = cyylex();
 
         if (token_code != PARSER_EOL) {
 
-            printf ("Rejectd : Entire String is not a Valid Mathematical Expression\n");
+            printf ("Rejectd : Entire String is not a Valid Logical Expression\n");
         }
         else {
 

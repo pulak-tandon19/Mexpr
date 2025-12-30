@@ -27,14 +27,17 @@ Combining everything, final grammar is :
 3.    T  ->   F T’
 4.    T’ ->   * F T' |   / F T'  |  $
 5.    F  ->   ( E ) |  INTEGER | DECIMAL | VAR
-
+6.    Q -> E INEQ E
+7.    INEQ ->     MATH_CPP_EQ  |  MATH_CPP_NEQ |  MATH_CPP_LESS_THAN  |   MATH_CPP_LESS_THAN_EQ
 */
 
 parse_rc_t E() ;
+parse_rc_t Q() ;
 static parse_rc_t E_dash() ;
 static parse_rc_t T() ;
 static parse_rc_t T_dash() ;
 static parse_rc_t F() ;
+static parse_rc_t INEQ() ;
 
 parse_rc_t 
 E() { 
@@ -195,4 +198,44 @@ F() {
     }while(0);
 
     RETURN_PARSE_ERROR;
+}
+
+parse_rc_t
+Q() {
+    parse_init();
+
+    err = E();
+    if (err == PARSE_ERR)
+        RETURN_PARSE_ERROR;
+
+    token_code = cyylex();
+    if (token_code == PARSE_ERR) {
+        RETURN_PARSE_ERROR;
+    }
+
+    err = E();
+    if (err == PARSE_ERR)
+        RETURN_PARSE_ERROR;
+
+    RETURN_PARSE_SUCCESS;
+}
+
+parse_rc_t
+INEQ() {
+    parse_init();
+
+    switch (token_code) {
+        case MATH_CPP_EQ:
+        case MATH_CPP_NEQ:
+        case MATH_CPP_LESS_THAN:
+        case MATH_CPP_LESS_THAN_EQ:
+        case MATH_CPP_GREATER_THAN:
+        case MATH_CPP_GREATER_THAN_EQ:
+            // All these cases fall through to the success return
+            RETURN_PARSE_SUCCESS;
+
+        default:
+            // If the token matches none of the above, it's a parse error
+            RETURN_PARSE_ERROR;
+    }
 }
