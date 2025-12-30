@@ -3,6 +3,8 @@
 %{
 #include "ParserExport.h"
 
+stack_t undo_stack = {-1, {0, 0, 0}};
+
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
 char *lex_curr_token;
@@ -271,6 +273,7 @@ RESTORE_CHKP(int a) {
 
 %%
 
+extern parse_rc_t E();
 
 int main(int argc, char **argv) {
 
@@ -285,15 +288,36 @@ int main(int argc, char **argv) {
 
         yy_scan_string(lex_buffer);
 
-        int token_code = yylex();
+        // int token_code = yylex();
 
-        while (token_code != PARSER_EOL) {
-            printf(
-                "token_code = %d, token = %s, token_len = %d\n",
-                token_code, yytext, yyleng
-            );
-            token_code = yylex();
+        // while (token_code != PARSER_EOL) {
+        //     printf(
+        //         "token_code = %d, token = %s, token_len = %d\n",
+        //         token_code, yytext, yyleng
+        //     );
+        //     token_code = yylex();
+        // }
+
+        parse_rc_t err = E();
+
+        int token_code = cyylex();
+
+        if (token_code != PARSER_EOL) {
+
+            printf ("Rejectd : Entire String is not a Valid Mathematical Expression\n");
         }
+        else {
+
+            if (err == PARSE_ERR ) {
+
+                printf ("Rejected\n");
+            }
+            else {
+                printf ("Accepted\n");
+            }
+        }
+
+        parser_stack_reset();
     }
 
     return 0;

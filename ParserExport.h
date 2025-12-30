@@ -30,7 +30,6 @@ typedef struct stack_ {
     lex_data_t data[MAX_MEXPR_LEN];
 } stack_t;
 
-stack_t undo_stack = {-1, {0, 0, 0}};
 
 extern "C" int yylex();
 
