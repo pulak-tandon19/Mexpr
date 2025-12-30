@@ -500,6 +500,8 @@ char *yytext;
 #line 4 "Parser.l"
 #include "ParserExport.h"
 
+stack_t undo_stack = {-1, {0, 0, 0}};
+
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
 char *lex_curr_token;
@@ -628,8 +630,8 @@ RESTORE_CHKP(int a) {
 
 #include "MexprcppEnums.h"
 
-#line 631 "lex.yy.c"
-#line 632 "lex.yy.c"
+#line 633 "lex.yy.c"
+#line 634 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -846,9 +848,9 @@ YY_DECL
 		}
 
 	{
-#line 137 "Parser.l"
+#line 139 "Parser.l"
 
-#line 851 "lex.yy.c"
+#line 853 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -907,147 +909,147 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 138 "Parser.l"
+#line 140 "Parser.l"
 {
     return MATH_CPP_BRACKET_START;
 }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 142 "Parser.l"
+#line 144 "Parser.l"
 {
     return MATH_CPP_BRACKET_END;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 146 "Parser.l"
+#line 148 "Parser.l"
 {
     return MATH_CPP_LESS_THAN_EQ;
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 150 "Parser.l"
+#line 152 "Parser.l"
 {
     return MATH_CPP_LESS_THAN;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 154 "Parser.l"
+#line 156 "Parser.l"
 {
     return MATH_CPP_GREATER_THAN;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 158 "Parser.l"
+#line 160 "Parser.l"
 {
     return MATH_CPP_EQ;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 162 "Parser.l"
+#line 164 "Parser.l"
 {
     return MATH_CPP_NEQ;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 166 "Parser.l"
+#line 168 "Parser.l"
 {
     return MATH_CPP_AND;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 170 "Parser.l"
+#line 172 "Parser.l"
 {
     return MATH_CPP_OR;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 174 "Parser.l"
+#line 176 "Parser.l"
 {
     return MATH_CPP_MUL;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 178 "Parser.l"
+#line 180 "Parser.l"
 {
     return MATH_CPP_PLUS;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 182 "Parser.l"
+#line 184 "Parser.l"
 {
     return  MATH_CPP_MINUS;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 186 "Parser.l"
+#line 188 "Parser.l"
 {
     return MATH_CPP_DIV;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 190 "Parser.l"
+#line 192 "Parser.l"
 {
     return MATH_CPP_COMMA;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 194 "Parser.l"
+#line 196 "Parser.l"
 {
     return MATH_CPP_SQRT;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 198 "Parser.l"
+#line 200 "Parser.l"
 {
     return MATH_CPP_SQR;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 202 "Parser.l"
+#line 204 "Parser.l"
 {
     return MATH_CPP_MAX;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 206 "Parser.l"
+#line 208 "Parser.l"
 {
     return MATH_CPP_MIN;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 210 "Parser.l"
+#line 212 "Parser.l"
 {
     return MATH_CPP_SIN;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 214 "Parser.l"
+#line 216 "Parser.l"
 {
     return MATH_CPP_COS;
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 218 "Parser.l"
+#line 220 "Parser.l"
 {
     return MATH_CPP_POW;
 }
@@ -1055,7 +1057,7 @@ YY_RULE_SETUP
 case 22:
 /* rule 22 can match eol */
 YY_RULE_SETUP
-#line 222 "Parser.l"
+#line 224 "Parser.l"
 {
     return PARSER_EOL;
 }
@@ -1063,14 +1065,14 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 226 "Parser.l"
+#line 228 "Parser.l"
 {
 
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 230 "Parser.l"
+#line 232 "Parser.l"
 {
     /* Ignore */
     process_white_space(1);
@@ -1078,7 +1080,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 235 "Parser.l"
+#line 237 "Parser.l"
 {
     /*ignore tabs*/
     process_white_space(4);
@@ -1086,28 +1088,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 240 "Parser.l"
+#line 242 "Parser.l"
 {
     return MATH_CPP_INT;
 }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 244 "Parser.l"
+#line 246 "Parser.l"
 {
     return MATH_CPP_DOUBLE;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 248 "Parser.l"
+#line 250 "Parser.l"
 {
     return MATH_CPP_VARIABLE;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 252 "Parser.l"
+#line 254 "Parser.l"
 {
     return MATH_CPP_VARIABLE;
 }
@@ -1115,7 +1117,7 @@ YY_RULE_SETUP
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 256 "Parser.l"
+#line 258 "Parser.l"
 {
     // string enclosed within single quotes
     return MATH_CPP_STRING;
@@ -1124,7 +1126,7 @@ YY_RULE_SETUP
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 261 "Parser.l"
+#line 263 "Parser.l"
 {
     // string enclosed within double quotes
     return MATH_CPP_STRING;
@@ -1132,17 +1134,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 267 "Parser.l"
+#line 269 "Parser.l"
 {
     printf ("ignore non-parsable character - %s\n", yytext);
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 272 "Parser.l"
+#line 274 "Parser.l"
 ECHO;
 	YY_BREAK
-#line 1145 "lex.yy.c"
+#line 1147 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2147,9 +2149,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 272 "Parser.l"
+#line 274 "Parser.l"
 
 
+extern parse_rc_t E();
 
 int main(int argc, char **argv) {
 
@@ -2164,15 +2167,36 @@ int main(int argc, char **argv) {
 
         yy_scan_string(lex_buffer);
 
-        int token_code = yylex();
+        // int token_code = yylex();
 
-        while (token_code != PARSER_EOL) {
-            printf(
-                "token_code = %d, token = %s, token_len = %d\n",
-                token_code, yytext, yyleng
-            );
-            token_code = yylex();
+        // while (token_code != PARSER_EOL) {
+        //     printf(
+        //         "token_code = %d, token = %s, token_len = %d\n",
+        //         token_code, yytext, yyleng
+        //     );
+        //     token_code = yylex();
+        // }
+
+        parse_rc_t err = E();
+
+        int token_code = cyylex();
+
+        if (token_code != PARSER_EOL) {
+
+            printf ("Rejectd : Entire String is not a Valid Mathematical Expression\n");
         }
+        else {
+
+            if (err == PARSE_ERR ) {
+
+                printf ("Rejected\n");
+            }
+            else {
+                printf ("Accepted\n");
+            }
+        }
+
+        parser_stack_reset();
     }
 
     return 0;
