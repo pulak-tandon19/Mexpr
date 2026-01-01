@@ -17,4 +17,10 @@ class Operator : public MexprNode {
         bool is_unary;
 };
 
+class OperatorPlus : public Operator {
+    public:
+        OperatorPlus();
+        ~OperatorPlus();
+};
+
 #endif
