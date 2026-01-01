@@ -15,6 +15,15 @@ g++ -g -c ExpressionParser.c -o ExpressionParser.o
 echo "--- Compiling EnumConverter.cpp ---"
 g++ -g -c EnumConverter.cpp -o EnumConverter.o
 
+echo "--- Compiling MexprTree.cpp ---"
+g++ -g -c MexprTree.cpp -o MexprTree.o
+
+echo "--- Compiling Operators.cpp ---"
+g++ -g -c Operators.cpp -o Operators.o
+
+echo "--- Compiling Dtype.cpp ---"
+g++ -g -c Dtype.cpp -o Dtype.o
+
 echo "--- Linking executable ---"
 g++ -g lex.yy.o ExpressionParser.o EnumConverter.o -o exe -lfl
 
