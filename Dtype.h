@@ -14,4 +14,26 @@ class Dtype : public MexprNode {
         virtual ~Dtype();
 };
 
+class Dtype_INT: public Dtype{
+    public:
+        struct {
+            int int_val;
+        } dtype;
+
+        Dtype_INT();
+        Dtype_INT(int val);
+        ~Dtype_INT();
+};
+
+class Dtype_STRING: public Dtype{
+    public:
+        struct {
+            std::string string_val;
+        } dtype;
+
+        Dtype_STRING();
+        Dtype_STRING(std::string val);
+        ~Dtype_STRING();
+}; 
+
 #endif
