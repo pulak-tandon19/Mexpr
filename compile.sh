@@ -12,7 +12,10 @@ g++ -g -c lex.yy.c -o lex.yy.o
 echo "--- Compiling ExpressionParser.c ---"
 g++ -g -c ExpressionParser.c -o ExpressionParser.o
 
+echo "--- Compiling EnumConverter.cpp ---"
+g++ -g -c EnumConverter.cpp -o EnumConverter.o
+
 echo "--- Linking executable ---"
-g++ -g lex.yy.o ExpressionParser.o -o exe -lfl
+g++ -g lex.yy.o ExpressionParser.o EnumConverter.o -o exe -lfl
 
 echo "--- Build Successful! Run with ./exe ---"
