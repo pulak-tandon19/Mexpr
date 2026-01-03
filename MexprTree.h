@@ -44,10 +44,10 @@ class MexprTree {
 
     public:
         MexprNode *root; 
-        MexprNode *lst_head; /// will discuss in next lecture video !
+        MexprNode *lst_head; 
         MexprTree();
         virtual ~MexprTree();
-        MexprTree(lex_data_t **postfix_lex_data_array, int size); // constructor 
+        MexprTree(lex_data_t **postfix_lex_data_array, int size); 
         static void InorderPrint (MexprTree *tree);
         bool validate (MexprNode *root);
         Dtype *evaluate(MexprNode *root);
