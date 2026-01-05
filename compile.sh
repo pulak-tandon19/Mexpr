@@ -24,6 +24,17 @@ g++ -g -c Operators.cpp -o Operators.o
 echo "--- Compiling Dtype.cpp ---"
 g++ -g -c Dtype.cpp -o Dtype.o
 
+echo "--- Compiling MexprTree.cpp ---"
+g++ -g -c MexprTree.cpp -o MexprTree.o
+
+echo "--- Compiling calculator.cpp---"
+g++ -g -c calculator.cpp -o calculator.o
+
+echo "--- Creating calculator executable ---"
+g++ -g lex.yy.o ExpressionParser.o EnumConverter.o  Operators.o Dtype.o MexprTree.o calculator.o -o calculator -lfl
+
+echo "--- Build Successful! Run with ./calculator ---"
+
 echo "--- Linking executable ---"
 g++ -g lex.yy.o ExpressionParser.o EnumConverter.o -o exe -lfl
 
