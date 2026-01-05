@@ -37,3 +37,6 @@ echo "--- Linking executable ---"
 g++ -g lex_parser/lex.yy.o ExpressionParser/ExpressionParser.o Enums/EnumConverter.o -o executables/parser/exe -lfl
 
 echo "--- Build Successful! Run with ./executables/parser/exe ---"
+
+echo "--- Creating Static Library libMexpr.a ---"
+ar rcs libMexpr.a ExpressionParser/ExpressionParser.o Operators/Operators.o Dtypes/Dtype.o MexprTree/MexprTree.o Enums/EnumConverter.o
