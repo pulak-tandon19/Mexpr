@@ -4,38 +4,36 @@
 set -e
 
 echo "--- Generating Lexer ---"
-lex Parser.l
+lex -o lex_parser/lex.yy.c lex_parser/Parser.l
+
 
 echo "--- Compiling lex.yy.c ---"
-g++ -g -c lex.yy.c -o lex.yy.o
+g++ -g -Iheaders -c lex_parser/lex.yy.c -o lex_parser/lex.yy.o
 
 echo "--- Compiling ExpressionParser.c ---"
-g++ -g -c ExpressionParser.c -o ExpressionParser.o
+g++ -g -Iheaders -c ExpressionParser/ExpressionParser.c -o ExpressionParser/ExpressionParser.o
 
 echo "--- Compiling EnumConverter.cpp ---"
-g++ -g -c EnumConverter.cpp -o EnumConverter.o
-
-echo "--- Compiling MexprTree.cpp ---"
-g++ -g -c MexprTree.cpp -o MexprTree.o
+g++ -g -Iheaders -c Enums/EnumConverter.cpp -o Enums/EnumConverter.o
 
 echo "--- Compiling Operators.cpp ---"
-g++ -g -c Operators.cpp -o Operators.o
+g++ -g -Iheaders -c Operators/Operators.cpp -o Operators/Operators.o
 
 echo "--- Compiling Dtype.cpp ---"
-g++ -g -c Dtype.cpp -o Dtype.o
+g++ -g -Iheaders -c Dtypes/Dtype.cpp -o Dtypes/Dtype.o
 
 echo "--- Compiling MexprTree.cpp ---"
-g++ -g -c MexprTree.cpp -o MexprTree.o
+g++ -g -Iheaders -c MexprTree/MexprTree.cpp -o MexprTree/MexprTree.o
 
 echo "--- Compiling calculator.cpp---"
-g++ -g -c calculator.cpp -o calculator.o
+g++ -g -Iheaders -c calculator/calculator.cpp -o calculator/calculator.o
 
 echo "--- Creating calculator executable ---"
-g++ -g lex.yy.o ExpressionParser.o EnumConverter.o  Operators.o Dtype.o MexprTree.o calculator.o -o calculator -lfl
+g++ -g lex_parser/lex.yy.o ExpressionParser/ExpressionParser.o Enums/EnumConverter.o  Operators/Operators.o Dtypes/Dtype.o MexprTree/MexprTree.o calculator/calculator.o -o executables/calculator/calculator -lfl
 
-echo "--- Build Successful! Run with ./calculator ---"
+echo "--- Build Successful! Run with ./executables/calculator/calculator ---"
 
 echo "--- Linking executable ---"
-g++ -g lex.yy.o ExpressionParser.o EnumConverter.o -o exe -lfl
+g++ -g lex_parser/lex.yy.o ExpressionParser/ExpressionParser.o Enums/EnumConverter.o -o executables/parser/exe -lfl
 
-echo "--- Build Successful! Run with ./exe ---"
+echo "--- Build Successful! Run with ./executables/parser/exe ---"
