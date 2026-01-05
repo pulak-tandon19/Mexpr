@@ -1,7 +1,7 @@
 %option noyywrap
 
 %{
-#include "ParserExport.h"
+#include "lex_parser/ParserExport.h"
 
 stack_t undo_stack = {-1, {0, 0, 0}};
 
@@ -131,7 +131,7 @@ RESTORE_CHKP(int a) {
     yy_scan_string(curr_ptr);
 }
 
-#include "MexprcppEnums.h"
+#include "Enums/MexprcppEnums.h"
 
 %}
 

@@ -1,6 +1,6 @@
 #include <string>
 #include <algorithm>
-#include "Dtype.h"
+#include "Dtypes/Dtype.h"
 
 Dtype::Dtype() {
 

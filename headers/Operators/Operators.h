@@ -3,9 +3,9 @@
 
 #include <stdbool.h>
 #include <string>
-#include "MexprTree.h"
-#include "MexprcppEnums.h"
-#include "Dtype.h"
+#include "MexprTree/MexprTree.h"
+#include "Enums/MexprcppEnums.h"
+#include "Dtypes/Dtype.h"
 
 
 class Operator : public MexprNode {

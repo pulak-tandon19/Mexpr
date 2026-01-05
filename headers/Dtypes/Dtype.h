@@ -2,8 +2,8 @@
 #define __DTYPE__
 
 #include <string>
-#include "MexprTree.h"
-#include "MexprcppEnums.h"
+#include "MexprTree/MexprTree.h"
+#include "Enums/MexprcppEnums.h"
 
 class Dtype : public MexprNode {
 

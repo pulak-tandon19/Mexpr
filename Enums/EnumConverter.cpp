@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "MexprcppEnums.h"
-#include "ParserExport.h"
+#include "Enums/MexprcppEnums.h"
+#include "lex_parser/ParserExport.h"
 #include <stack>
 
 static lex_data_t *

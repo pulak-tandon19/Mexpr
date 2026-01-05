@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include "MexprcppEnums.h"
+#include "Enums/MexprcppEnums.h"
 
 class Dtype;
 

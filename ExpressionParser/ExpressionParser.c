@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "ParserExport.h"
-#include "MexprcppEnums.h"
+#include "lex_parser/ParserExport.h"
+#include "Enums/MexprcppEnums.h"
 
 /*
 

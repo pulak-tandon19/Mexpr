@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 #include<stdio.h>
-#include "MexprTree.h"
-#include "Dtype.h"
-#include "Operators.h"
-#include "MexprcppEnums.h"
-#include "ParserExport.h"
+#include "MexprTree/MexprTree.h"
+#include "Dtypes/Dtype.h"
+#include "Operators/Operators.h"
+#include "Enums/MexprcppEnums.h"
+#include "lex_parser/ParserExport.h"
 
 extern parse_rc_t E();
 extern parse_rc_t Q();

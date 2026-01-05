@@ -1,9 +1,9 @@
 #include <assert.h>
-#include "MexprTree.h"
-#include "ParserExport.h"
+#include "MexprTree/MexprTree.h"
+#include "lex_parser/ParserExport.h"
 #include <stack>
-#include "Dtype.h"
-#include "Operators.h"
+#include "Dtypes/Dtype.h"
+#include "Operators/Operators.h"
 
 MexprNode::MexprNode() {
 

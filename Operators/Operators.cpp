@@ -1,6 +1,6 @@
 #include <math.h>
-#include "Operators.h"
-#include "Dtype.h"
+#include "Operators/Operators.h"
+#include "Dtypes/Dtype.h"
 
 // base class
 Operator::Operator () {
