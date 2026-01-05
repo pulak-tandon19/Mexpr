@@ -153,13 +153,14 @@ RESTORE_CHKP(int a) {
     return MATH_CPP_LESS_THAN;
 }
 
+">=" {
+    return MATH_CPP_GREATER_THAN_EQ;
+}
+
 ">" {
     return MATH_CPP_GREATER_THAN;
 }
 
-">=" {
-    return MATH_CPP_GREATER_THAN_EQ;
-}
 
 "=" {
     return MATH_CPP_EQ;
@@ -284,70 +285,70 @@ extern parse_rc_t F();
 extern lex_data_t **
 mexpr_convert_infix_to_postfix (lex_data_t *infix, int sizein, int *size_out);
 
-int main(int argc, char **argv) {
+// int main(int argc, char **argv) {
 
-    while (1) {
+//     while (1) {
 
-        printf("Input:- ");
-        fgets(lex_buffer, sizeof(lex_buffer), stdin);
+//         printf("Input:- ");
+//         fgets(lex_buffer, sizeof(lex_buffer), stdin);
 
-        if (lex_buffer[0] == '\n') {
-            continue;
-        }
+//         if (lex_buffer[0] == '\n') {
+//             continue;
+//         }
 
-        yy_scan_string(lex_buffer);
+//         yy_scan_string(lex_buffer);
 
-        // int token_code = yylex();
+//         // int token_code = yylex();
 
-        // while (token_code != PARSER_EOL) {
-        //     printf(
-        //         "token_code = %d, token = %s, token_len = %d\n",
-        //         token_code, yytext, yyleng
-        //     );
-        //     token_code = yylex();
-        // }
+//         // while (token_code != PARSER_EOL) {
+//         //     printf(
+//         //         "token_code = %d, token = %s, token_len = %d\n",
+//         //         token_code, yytext, yyleng
+//         //     );
+//         //     token_code = yylex();
+//         // }
 
-        parse_rc_t err = E();
+//         parse_rc_t err = E();
 
-        int token_code = cyylex();
+//         int token_code = cyylex();
 
-        if (token_code != PARSER_EOL) {
+//         if (token_code != PARSER_EOL) {
 
-            printf ("Rejectd : Entire String is not a Valid Logical Expression\n");
-        }
-        else {
+//             printf ("Rejectd : Entire String is not a Valid Logical Expression\n");
+//         }
+//         else {
 
-            if (err == PARSE_ERR ) {
+//             if (err == PARSE_ERR ) {
 
-                printf ("Rejected\n");
-            }
-            else {
-                printf ("Accepted\n");
+//                 printf ("Rejected\n");
+//             }
+//             else {
+//                 printf ("Accepted\n");
 
-                int size_out = 0;
-                lex_data_t **postfix_array = mexpr_convert_infix_to_postfix (
-                                                                undo_stack.data,
-                                                                undo_stack.top + 1,
-                                                                &size_out);
+//                 int size_out = 0;
+//                 lex_data_t **postfix_array = mexpr_convert_infix_to_postfix (
+//                                                                 undo_stack.data,
+//                                                                 undo_stack.top + 1,
+//                                                                 &size_out);
 
-                // print the postfix_array here to verify !
-                printf ("Postfix : ");
+//                 // print the postfix_array here to verify !
+//                 printf ("Postfix : ");
 
-                for (int i = 0; i < size_out; i++) {
+//                 for (int i = 0; i < size_out; i++) {
 
-                    lex_data_t *lex_data = postfix_array[i];
-                    printf ("%s ", lex_data->token_val);
-                    free(lex_data->token_val);
-                    free(lex_data);
-                }
-                free(postfix_array);
+//                     lex_data_t *lex_data = postfix_array[i];
+//                     printf ("%s ", lex_data->token_val);
+//                     free(lex_data->token_val);
+//                     free(lex_data);
+//                 }
+//                 free(postfix_array);
                 
-                printf ("\n");
-            }
-        }
+//                 printf ("\n");
+//             }
+//         }
 
-        parser_stack_reset();
-    }
+//         parser_stack_reset();
+//     }
 
-    return 0;
-}
+//     return 0;
+// }

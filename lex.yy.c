@@ -367,9 +367,9 @@ static const flex_int16_t yy_accept[70] =
     {   0,
         0,    0,   35,   33,   26,   23,   25,   33,   33,   33,
         1,    2,   11,   12,   15,   13,   33,   14,   27,   27,
-        4,    7,    5,   29,   33,   29,   29,   29,   29,   29,
+        4,    7,    6,   29,   33,   29,   29,   29,   29,   29,
        29,    8,    0,   32,    0,   31,    0,    0,   27,   28,
-        0,   29,   29,   27,    3,    6,    0,   24,   29,   29,
+        0,   29,   29,   27,    3,    5,    0,   24,   29,   29,
        29,   10,   29,   29,   29,   27,   28,   30,    9,   21,
        29,   29,   22,   20,   17,   18,   19,   16,    0
     } ;
@@ -939,124 +939,124 @@ case 5:
 YY_RULE_SETUP
 #line 156 "Parser.l"
 {
-    return MATH_CPP_GREATER_THAN;
+    return MATH_CPP_GREATER_THAN_EQ;
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 160 "Parser.l"
 {
-    return MATH_CPP_GREATER_THAN_EQ;
+    return MATH_CPP_GREATER_THAN;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 164 "Parser.l"
+#line 165 "Parser.l"
 {
     return MATH_CPP_EQ;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 168 "Parser.l"
+#line 169 "Parser.l"
 {
     return MATH_CPP_NEQ;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 172 "Parser.l"
+#line 173 "Parser.l"
 {
     return MATH_CPP_AND;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 176 "Parser.l"
+#line 177 "Parser.l"
 {
     return MATH_CPP_OR;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 180 "Parser.l"
+#line 181 "Parser.l"
 {
     return MATH_CPP_MUL;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 184 "Parser.l"
+#line 185 "Parser.l"
 {
     return MATH_CPP_PLUS;
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 188 "Parser.l"
+#line 189 "Parser.l"
 {
     return  MATH_CPP_MINUS;
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 192 "Parser.l"
+#line 193 "Parser.l"
 {
     return MATH_CPP_DIV;
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 196 "Parser.l"
+#line 197 "Parser.l"
 {
     return MATH_CPP_COMMA;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 200 "Parser.l"
+#line 201 "Parser.l"
 {
     return MATH_CPP_SQRT;
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 204 "Parser.l"
+#line 205 "Parser.l"
 {
     return MATH_CPP_SQR;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 208 "Parser.l"
+#line 209 "Parser.l"
 {
     return MATH_CPP_MAX;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 212 "Parser.l"
+#line 213 "Parser.l"
 {
     return MATH_CPP_MIN;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 216 "Parser.l"
+#line 217 "Parser.l"
 {
     return MATH_CPP_SIN;
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 220 "Parser.l"
+#line 221 "Parser.l"
 {
     return MATH_CPP_COS;
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 224 "Parser.l"
+#line 225 "Parser.l"
 {
     return MATH_CPP_POW;
 }
@@ -1064,7 +1064,7 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 228 "Parser.l"
+#line 229 "Parser.l"
 {
     return PARSER_EOL;
 }
@@ -1072,14 +1072,14 @@ YY_RULE_SETUP
 case 24:
 /* rule 24 can match eol */
 YY_RULE_SETUP
-#line 232 "Parser.l"
+#line 233 "Parser.l"
 {
 
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 236 "Parser.l"
+#line 237 "Parser.l"
 {
     /* Ignore */
     process_white_space(1);
@@ -1087,7 +1087,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 241 "Parser.l"
+#line 242 "Parser.l"
 {
     /*ignore tabs*/
     process_white_space(4);
@@ -1095,28 +1095,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 246 "Parser.l"
+#line 247 "Parser.l"
 {
     return MATH_CPP_INT;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 250 "Parser.l"
+#line 251 "Parser.l"
 {
     return MATH_CPP_DOUBLE;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 254 "Parser.l"
+#line 255 "Parser.l"
 {
     return MATH_CPP_VARIABLE;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 258 "Parser.l"
+#line 259 "Parser.l"
 {
     return MATH_CPP_VARIABLE;
 }
@@ -1124,7 +1124,7 @@ YY_RULE_SETUP
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 262 "Parser.l"
+#line 263 "Parser.l"
 {
     // string enclosed within single quotes
     return MATH_CPP_STRING;
@@ -1133,7 +1133,7 @@ YY_RULE_SETUP
 case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
-#line 267 "Parser.l"
+#line 268 "Parser.l"
 {
     // string enclosed within double quotes
     return MATH_CPP_STRING;
@@ -1141,14 +1141,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 273 "Parser.l"
+#line 274 "Parser.l"
 {
     printf ("ignore non-parsable character - %s\n", yytext);
 }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 278 "Parser.l"
+#line 279 "Parser.l"
 ECHO;
 	YY_BREAK
 #line 1154 "lex.yy.c"
@@ -2156,7 +2156,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 278 "Parser.l"
+#line 279 "Parser.l"
 
 
 extern parse_rc_t E();
@@ -2166,71 +2166,71 @@ extern parse_rc_t F();
 extern lex_data_t **
 mexpr_convert_infix_to_postfix (lex_data_t *infix, int sizein, int *size_out);
 
-int main(int argc, char **argv) {
+// int main(int argc, char **argv) {
 
-    while (1) {
+//     while (1) {
 
-        printf("Input:- ");
-        fgets(lex_buffer, sizeof(lex_buffer), stdin);
+//         printf("Input:- ");
+//         fgets(lex_buffer, sizeof(lex_buffer), stdin);
 
-        if (lex_buffer[0] == '\n') {
-            continue;
-        }
+//         if (lex_buffer[0] == '\n') {
+//             continue;
+//         }
 
-        yy_scan_string(lex_buffer);
+//         yy_scan_string(lex_buffer);
 
-        // int token_code = yylex();
+//         // int token_code = yylex();
 
-        // while (token_code != PARSER_EOL) {
-        //     printf(
-        //         "token_code = %d, token = %s, token_len = %d\n",
-        //         token_code, yytext, yyleng
-        //     );
-        //     token_code = yylex();
-        // }
+//         // while (token_code != PARSER_EOL) {
+//         //     printf(
+//         //         "token_code = %d, token = %s, token_len = %d\n",
+//         //         token_code, yytext, yyleng
+//         //     );
+//         //     token_code = yylex();
+//         // }
 
-        parse_rc_t err = E();
+//         parse_rc_t err = E();
 
-        int token_code = cyylex();
+//         int token_code = cyylex();
 
-        if (token_code != PARSER_EOL) {
+//         if (token_code != PARSER_EOL) {
 
-            printf ("Rejectd : Entire String is not a Valid Logical Expression\n");
-        }
-        else {
+//             printf ("Rejectd : Entire String is not a Valid Logical Expression\n");
+//         }
+//         else {
 
-            if (err == PARSE_ERR ) {
+//             if (err == PARSE_ERR ) {
 
-                printf ("Rejected\n");
-            }
-            else {
-                printf ("Accepted\n");
+//                 printf ("Rejected\n");
+//             }
+//             else {
+//                 printf ("Accepted\n");
 
-                int size_out = 0;
-                lex_data_t **postfix_array = mexpr_convert_infix_to_postfix (
-                                                                undo_stack.data,
-                                                                undo_stack.top + 1,
-                                                                &size_out);
+//                 int size_out = 0;
+//                 lex_data_t **postfix_array = mexpr_convert_infix_to_postfix (
+//                                                                 undo_stack.data,
+//                                                                 undo_stack.top + 1,
+//                                                                 &size_out);
 
-                // print the postfix_array here to verify !
-                printf ("Postfix : ");
+//                 // print the postfix_array here to verify !
+//                 printf ("Postfix : ");
 
-                for (int i = 0; i < size_out; i++) {
+//                 for (int i = 0; i < size_out; i++) {
 
-                    lex_data_t *lex_data = postfix_array[i];
-                    printf ("%s ", lex_data->token_val);
-                    free(lex_data->token_val);
-                    free(lex_data);
-                }
-                free(postfix_array);
+//                     lex_data_t *lex_data = postfix_array[i];
+//                     printf ("%s ", lex_data->token_val);
+//                     free(lex_data->token_val);
+//                     free(lex_data);
+//                 }
+//                 free(postfix_array);
                 
-                printf ("\n");
-            }
-        }
+//                 printf ("\n");
+//             }
+//         }
 
-        parser_stack_reset();
-    }
+//         parser_stack_reset();
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
