@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ParserExport.h"
 #include "MexprcppEnums.h"
 
@@ -404,7 +405,10 @@ INEQ() {
         case MATH_CPP_NEQ:
         case MATH_CPP_LESS_THAN:
         case MATH_CPP_LESS_THAN_EQ:
+        case MATH_CPP_GREATER_THAN:
+        case MATH_CPP_GREATER_THAN_EQ: {
             RETURN_PARSE_SUCCESS;
+        }
         default:
             RETURN_PARSE_ERROR;
     }

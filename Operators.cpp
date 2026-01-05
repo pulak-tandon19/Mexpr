@@ -14,8 +14,6 @@ Operator::~Operator () {
 
 }
 
-
-
 // concrete class now
 
  OperatorPlus:: OperatorPlus() {
@@ -1107,6 +1105,139 @@ OperatorLessThan::compute(Dtype *dtype1, Dtype *dtype2) {
     return NULL;
 }
 
+OperatorLessThanEq:: OperatorLessThanEq() {
+
+    this->opid = MATH_CPP_LESS_THAN_EQ;
+    this->name = "<=";
+    this->is_unary = false;
+ }
+
+OperatorLessThanEq:: ~OperatorLessThanEq() {}
+
+MexprNode * 
+OperatorLessThanEq::clone() {
+
+    OperatorLessThanEq *obj = new OperatorLessThanEq();
+    *obj = *this;
+    obj->parent = NULL;
+    obj->left = NULL;
+    obj->right = NULL;
+    obj->lst_left = NULL;
+    obj->lst_right = NULL;
+    return obj;
+}
+
+mexprcpp_dtypes_t
+OperatorLessThanEq::ResultStorageType(mexprcpp_dtypes_t did1, mexprcpp_dtypes_t did2) {
+
+    switch (did1) {
+
+        case MATH_CPP_INT:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_BOOL;
+                default: 
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+        case MATH_CPP_DOUBLE:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_BOOL;
+                default: 
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+
+           case MATH_CPP_DTYPE_WILDCRAD:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                    return MATH_CPP_BOOL;
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_DTYPE_WILDCRAD;
+                case MATH_CPP_DTYPE_INVALID:
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+        default:
+            return MATH_CPP_DTYPE_INVALID;
+    }
+}
+
+Dtype*
+OperatorLessThanEq::compute(Dtype *dtype1, Dtype *dtype2) {
+
+  Dtype *res = Dtype::factory (MATH_CPP_BOOL);
+
+    switch (dtype1->did) {
+
+        case MATH_CPP_INT:
+
+            switch (dtype2->did) {
+
+                case MATH_CPP_INT:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val = dynamic_cast<Dtype_INT *> (dtype1)->dtype.int_val <=
+                                                        dynamic_cast<Dtype_INT *> (dtype2)->dtype.int_val;
+                    return res;
+                }
+                break;
+
+                case MATH_CPP_DOUBLE:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val  = (double)dynamic_cast<Dtype_INT *> (dtype1)->dtype.int_val <=
+                                                        dynamic_cast<Dtype_DOUBLE *> (dtype2)->dtype.d_val;
+                    return res;
+                }
+                default:
+                    return NULL;
+            }
+            break;
+
+
+        case MATH_CPP_DOUBLE:
+
+            switch (dtype2->did) {
+
+                case MATH_CPP_INT:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                     res_b->dtype.b_val = dynamic_cast<Dtype_DOUBLE *> (dtype1)->dtype.d_val <=
+                                                        (double)dynamic_cast<Dtype_INT *> (dtype2)->dtype.int_val;
+                    return res;                
+                }
+                case MATH_CPP_DOUBLE:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val  = dynamic_cast<Dtype_DOUBLE *> (dtype1)->dtype.d_val <=
+                                                        dynamic_cast<Dtype_DOUBLE *> (dtype2)->dtype.d_val;
+                    return res;
+                }
+                default:
+                    return NULL;
+            }
+            break;            
+
+        default:
+            return NULL;
+
+    }
+    
+    return NULL;
+}
 
 
 
@@ -1244,7 +1375,139 @@ OperatorGreaterThan::compute(Dtype *dtype1, Dtype *dtype2) {
     return NULL;
 }
 
+OperatorGreaterThanEq:: OperatorGreaterThanEq() {
 
+    this->opid = MATH_CPP_GREATER_THAN_EQ;
+    this->name = ">=";
+    this->is_unary = false;
+ }
+
+OperatorGreaterThanEq:: ~OperatorGreaterThanEq() {}
+
+MexprNode * 
+OperatorGreaterThanEq::clone() {
+
+    OperatorGreaterThanEq *obj = new OperatorGreaterThanEq();
+    *obj = *this;
+    obj->parent = NULL;
+    obj->left = NULL;
+    obj->right = NULL;
+    obj->lst_left = NULL;
+    obj->lst_right = NULL;
+    return obj;
+}
+
+mexprcpp_dtypes_t
+OperatorGreaterThanEq::ResultStorageType(mexprcpp_dtypes_t did1, mexprcpp_dtypes_t did2) {
+
+    switch (did1) {
+
+        case MATH_CPP_INT:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_BOOL;
+                default: 
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+        case MATH_CPP_DOUBLE:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_BOOL;
+                default: 
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+
+           case MATH_CPP_DTYPE_WILDCRAD:
+
+            switch (did2) {
+
+                case MATH_CPP_INT:
+                case MATH_CPP_DOUBLE:
+                    return MATH_CPP_BOOL;
+                case MATH_CPP_DTYPE_WILDCRAD:
+                    return MATH_CPP_DTYPE_WILDCRAD;
+                case MATH_CPP_DTYPE_INVALID:
+                    return MATH_CPP_DTYPE_INVALID;
+            }
+
+        default:
+            return MATH_CPP_DTYPE_INVALID;
+    }
+}
+
+Dtype*
+OperatorGreaterThanEq::compute(Dtype *dtype1, Dtype *dtype2) {
+
+  Dtype *res = Dtype::factory (MATH_CPP_BOOL);
+
+    switch (dtype1->did) {
+
+        case MATH_CPP_INT:
+
+            switch (dtype2->did) {
+
+                case MATH_CPP_INT:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val = dynamic_cast<Dtype_INT *> (dtype1)->dtype.int_val >=
+                                                        dynamic_cast<Dtype_INT *> (dtype2)->dtype.int_val;
+                    return res;
+                }
+                break;
+
+                case MATH_CPP_DOUBLE:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val  = (double)dynamic_cast<Dtype_INT *> (dtype1)->dtype.int_val >=
+                                                        dynamic_cast<Dtype_DOUBLE *> (dtype2)->dtype.d_val;
+                    return res;
+                }
+                default:
+                    return NULL;
+            }
+            break;
+
+
+        case MATH_CPP_DOUBLE:
+
+            switch (dtype2->did) {
+
+                case MATH_CPP_INT:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                     res_b->dtype.b_val = dynamic_cast<Dtype_DOUBLE *> (dtype1)->dtype.d_val >=
+                                                        (double)dynamic_cast<Dtype_INT *> (dtype2)->dtype.int_val;
+                    return res;                
+                }
+                case MATH_CPP_DOUBLE:
+                {
+                    Dtype_BOOL *res_b = dynamic_cast<Dtype_BOOL *> (res);
+                    res_b->dtype.b_val  = dynamic_cast<Dtype_DOUBLE *> (dtype1)->dtype.d_val >=
+                                                        dynamic_cast<Dtype_DOUBLE *> (dtype2)->dtype.d_val;
+                    return res;
+                }
+                default:
+                    return NULL;
+            }
+            break;            
+
+        default:
+            return NULL;
+
+    }
+    
+    return NULL;
+}
 
 
 OperatorSqr:: OperatorSqr() {
@@ -1956,6 +2219,10 @@ Operator::factory (mexprcpp_operators_t opr_code) {
             return new OperatorLessThan();
         case MATH_CPP_GREATER_THAN:
             return new OperatorGreaterThan();
+        case MATH_CPP_LESS_THAN_EQ:
+            return new OperatorLessThanEq();
+        case MATH_CPP_GREATER_THAN_EQ:
+            return new OperatorGreaterThanEq();
         case MATH_CPP_SQR:
             return new OperatorSqr();
         case MATH_CPP_SQRT:

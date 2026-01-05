@@ -140,6 +140,20 @@ class OperatorLessThan : public Operator {
      virtual Dtype* compute(Dtype *dtype1, Dtype *dtype2) override;
 };
 
+class OperatorLessThanEq : public Operator {
+
+    private:
+
+    protected:
+
+    public:
+        OperatorLessThanEq();
+     ~OperatorLessThanEq();
+    virtual MexprNode * clone() override;
+     virtual mexprcpp_dtypes_t ResultStorageType(mexprcpp_dtypes_t did1, mexprcpp_dtypes_t did2) override;    
+     virtual Dtype* compute(Dtype *dtype1, Dtype *dtype2) override;
+};
+
 
 
 class OperatorGreaterThan : public Operator {
@@ -151,6 +165,20 @@ class OperatorGreaterThan : public Operator {
     public:
         OperatorGreaterThan();
      ~OperatorGreaterThan();
+    virtual MexprNode * clone() override;
+     virtual mexprcpp_dtypes_t ResultStorageType(mexprcpp_dtypes_t did1, mexprcpp_dtypes_t did2) override;    
+     virtual Dtype* compute(Dtype *dtype1, Dtype *dtype2) override;
+};
+
+class OperatorGreaterThanEq : public Operator {
+
+    private:
+
+    protected:
+
+    public:
+        OperatorGreaterThanEq();
+     ~OperatorGreaterThanEq();
     virtual MexprNode * clone() override;
      virtual mexprcpp_dtypes_t ResultStorageType(mexprcpp_dtypes_t did1, mexprcpp_dtypes_t did2) override;    
      virtual Dtype* compute(Dtype *dtype1, Dtype *dtype2) override;
