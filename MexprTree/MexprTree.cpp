@@ -1,9 +1,12 @@
+#include<bits/stdc++.h>
+using namespace std;
 #include <assert.h>
 #include "MexprTree/MexprTree.h"
 #include "lex_parser/ParserExport.h"
 #include <stack>
 #include "Dtypes/Dtype.h"
 #include "Operators/Operators.h"
+#include <typeinfo>
 
 MexprNode::MexprNode() {
 
@@ -35,7 +38,8 @@ MexprTree::MexprTree(lex_data_t **postfix_lex_data_array, int size) {
     int i;
     MexprNode *node;
 
-    MexprTree();
+    this->root = NULL;
+    this->lst_head = NULL;
 
     std::stack<MexprNode *> stack;
 
@@ -56,10 +60,16 @@ MexprTree::MexprTree(lex_data_t **postfix_lex_data_array, int size) {
             if (dvar) {
                 // opernad node here is of type Dtype_VARIABLE
                 dvar->dtype.variable_name.assign(std::string((char *)postfix_lex_data_array[i]->token_val));
+
                 // add node into the Tree opernd list 
                 node->lst_right = this->lst_head;
-                if ( this->lst_head) this->lst_head->lst_left = node;
+
+                if ( this->lst_head != NULL) {
+                    this->lst_head->lst_left = node;
+                }
+
                 this->lst_head = node;
+
             }
             else {
                 // opernad node here is a constant opernad node ( int, double, string etc )

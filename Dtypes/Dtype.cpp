@@ -1,6 +1,9 @@
+#include <bits/stdc++.h>
 #include <string>
 #include <algorithm>
 #include "Dtypes/Dtype.h"
+
+using namespace std;
 
 Dtype::Dtype() {
 
@@ -260,6 +263,8 @@ Dtype_VARIABLE::Dtype_VARIABLE() {
     this->did = MATH_CPP_VARIABLE;
     this->dtype.variable_name.assign("");
     this->is_resolved = false;
+    this->lst_left = NULL;
+    this->lst_right = NULL;
     this->resolved_did = MATH_CPP_DTYPE_WILDCRAD;
 }
 
@@ -268,6 +273,8 @@ Dtype_VARIABLE::Dtype_VARIABLE(std::string var_name) {
     did = MATH_CPP_VARIABLE;
     this->dtype.variable_name.assign(var_name);
     this->is_resolved = false;
+    this->lst_left = NULL;
+    this->lst_right = NULL;
     this->resolved_did = MATH_CPP_DTYPE_WILDCRAD;
 }
 
