@@ -7,8 +7,8 @@ stack_t undo_stack = {-1, {0, 0, 0}};
 
 char lex_buffer[MAX_MEXPR_LEN];
 char *curr_ptr = lex_buffer;
-char *lex_curr_token;
-int lex_curr_token_len; 
+char *lex_curr_token; // pointer to the 
+int lex_curr_token_len; //length of the stack's top token
 
 static void 
 lex_push (lex_data_t lex_data) {
@@ -17,6 +17,8 @@ lex_push (lex_data_t lex_data) {
     lex_curr_token = (char *)lex_data.token_val;
     lex_curr_token_len = lex_data.token_len;
 }
+
+
 
 static lex_data_t
 lex_pop () {
@@ -98,7 +100,7 @@ void yyrewind(int n) {
     lex_data_t lex_data;
     while (n) {
         lex_data = lex_pop();
-        data_len = lex_data.token_len;
+        data_len += lex_data.token_len;
         if (lex_data.token_code == PARSER_WHITE_SPACE) {
             continue;
         }
